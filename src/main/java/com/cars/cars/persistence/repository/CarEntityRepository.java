@@ -1,0 +1,32 @@
+package com.cars.cars.persistence.repository;
+
+import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import com.cars.cars.domain.dto.CarDTO;
+import com.cars.cars.domain.repository.CarRepository;
+import com.cars.cars.persistence.crud.CarsCrud;
+import com.cars.cars.persistence.mapper.CarMapper;
+
+@Repository
+public class CarEntityRepository implements CarRepository{
+
+    private final CarsCrud carsCrud;
+    private final CarMapper carMapper;
+
+    public CarEntityRepository(CarsCrud carsCrud, CarMapper carMapper) {
+        this.carsCrud = carsCrud;
+        this.carMapper = carMapper;
+    }
+
+    @Override
+    public List<CarDTO> getAllCars() {
+        return carMapper.toDTOs(carsCrud.findAll());
+    }
+    
+    @Override
+    public CarDTO getCarById(Long id) {
+        return carMapper.toDTO(carsCrud.findById(id).orElse(null));
+    }
+}

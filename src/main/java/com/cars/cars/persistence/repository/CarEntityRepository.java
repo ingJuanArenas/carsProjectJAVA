@@ -8,6 +8,7 @@ import com.cars.cars.domain.dto.CarDTO;
 import com.cars.cars.domain.repository.CarRepository;
 import com.cars.cars.persistence.crud.CarsCrud;
 import com.cars.cars.persistence.mapper.CarMapper;
+import com.cars.cars.persistence.model.Car;
 
 @Repository
 public class CarEntityRepository implements CarRepository{
@@ -28,5 +29,10 @@ public class CarEntityRepository implements CarRepository{
     @Override
     public CarDTO getCarById(Long id) {
         return carMapper.toDTO(carsCrud.findById(id).orElse(null));
+    }
+
+    @Override
+    public CarDTO addCar(Car car) {
+        return carMapper.toDTO(carsCrud.save(car));
     }
 }

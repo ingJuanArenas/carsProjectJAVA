@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import com.cars.cars.domain.dto.CarDTO;
 import com.cars.cars.domain.repository.CarRepository;
+import com.cars.cars.persistence.model.Car;
 
 @Service
 public class CarService {
@@ -21,5 +22,9 @@ public class CarService {
 
     public CarDTO getCarById(Long id) {
         return carRepository.getCarById(id);
+    }
+
+    public CarDTO addCar(Car car) {
+        return carRepository.addCar(car);
     }
 }

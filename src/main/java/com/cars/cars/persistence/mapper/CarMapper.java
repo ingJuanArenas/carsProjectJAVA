@@ -3,8 +3,10 @@ package com.cars.cars.persistence.mapper;
 import java.util.List;
 
 import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
 
 import com.cars.cars.domain.dto.CarDTO;
+import com.cars.cars.domain.dto.UpdateDTO;
 import com.cars.cars.persistence.model.Car;
 
 @Mapper(componentModel = "spring")
@@ -14,5 +16,7 @@ public interface CarMapper {
     Car toEntity(CarDTO carDTO);
     CarDTO toDTO(Car car);
     List<CarDTO> toDTOs(Iterable<Car> cars);
+
+    void updateEntityFromDTO(UpdateDTO updateDTO, @MappingTarget Car car);
     
 } 

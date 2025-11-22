@@ -17,3 +17,18 @@ Content-Type: application/json
   "year": 2025,
   "price": 100000
 }
+
+
+###
+PUT http://localhost:8090/api/cars/cars/12
+Content-Type: application/json
+
+{
+  "model": "2026",
+  "year": 2026,
+  "price": 110000
+}
+
+###
+DELETE http://localhost:8090/api/cars/cars/12
+Accept: application/json

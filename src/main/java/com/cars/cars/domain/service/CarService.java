@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.cars.cars.domain.dto.CarDTO;
+import com.cars.cars.domain.dto.UpdateDTO;
 import com.cars.cars.domain.repository.CarRepository;
 import com.cars.cars.persistence.model.Car;
 
@@ -26,5 +27,13 @@ public class CarService {
 
     public CarDTO addCar(Car car) {
         return carRepository.addCar(car);
+    }
+
+    public CarDTO updateCar(long id, UpdateDTO updateDTO) {
+        return carRepository.updateCar(id, updateDTO);
+    }
+
+    public void deleteCar(long id) {
+        carRepository.deleteCar(id);
     }
 }

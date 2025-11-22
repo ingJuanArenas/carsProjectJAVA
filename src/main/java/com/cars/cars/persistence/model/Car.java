@@ -8,6 +8,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import jakarta.validation.constraints.NotBlank;
 
 @Entity
 @Table(name = "cars")
@@ -18,9 +19,11 @@ public class Car {
     private Long id;
 
     @Column(length = 30, nullable = false)
+    @NotBlank(message = "Brand cannot be blank")
     private String brand;
 
     @Column(length = 30, nullable = false)
+    @NotBlank(message = "Model cannot be blank")
     private String model;
 
     @Column(length = 4, nullable = false)

@@ -7,6 +7,8 @@ import com.cars.cars.domain.dto.UpdateDTO;
 import com.cars.cars.domain.service.CarService;
 import com.cars.cars.persistence.model.Car;
 
+import jakarta.validation.Valid;
+
 import java.util.List;
 
 import org.springframework.http.HttpStatus;
@@ -33,28 +35,21 @@ public class carsController {
 
     @GetMapping
     public ResponseEntity<List<CarDTO>> getAllCars() {
-        if (carService.getAllCars().isEmpty()) {
-            return ResponseEntity.noContent().build();
-        }
         return ResponseEntity.ok(carService.getAllCars());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CarDTO> getCarById(@PathVariable Long id) {
-
-        if (carService.getCarById(id) == null) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<CarDTO> getCarById(@PathVariable Long id) {        
         return ResponseEntity.ok(carService.getCarById(id));
     }
     
     @PostMapping
-    public ResponseEntity<CarDTO> addCar(@RequestBody Car car) {
+    public ResponseEntity<CarDTO> addCar(@RequestBody @Valid Car car) {
         return ResponseEntity.status(HttpStatus.CREATED).body(carService.addCar(car));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CarDTO> updateCar(@PathVariable long id, @RequestBody UpdateDTO updateDTO){
+    public ResponseEntity<CarDTO> updateCar(@PathVariable long id, @RequestBody @Valid UpdateDTO updateDTO){
         return ResponseEntity.ok(carService.updateCar(id, updateDTO));
     }
 

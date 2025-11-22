@@ -3,7 +3,7 @@ GET http://localhost:8090/api/cars/cars
 Accept: application/json
 
 ###
-GET http://localhost:8090/api/cars/cars/12
+GET http://localhost:8090/api/cars/cars/10
 Accept: application/json
 
 
@@ -12,10 +12,10 @@ POST http://localhost:8090/api/cars/cars
 Content-Type: application/json
 
 {
-  "brand": "BMW",
-  "model": "2025",
+  "brand": "",
+  "model": "",
   "year": 2025,
-  "price": 100000
+  "price": 10000
 }
 
 

@@ -7,6 +7,11 @@ import com.cars.cars.domain.dto.UpdateDTO;
 import com.cars.cars.domain.service.CarService;
 import com.cars.cars.persistence.model.Car;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 
 import java.util.List;
@@ -25,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
 @RequestMapping("/cars")
+@Tag(name = "Cars", description = "Operations related to cars")
 public class carsController {
 
     private final CarService carService;
@@ -34,27 +40,39 @@ public class carsController {
     }
 
     @GetMapping
+    @Operation(summary = "Get all cars", description = "Retrieve a list of all cars")
     public ResponseEntity<List<CarDTO>> getAllCars() {
         return ResponseEntity.ok(carService.getAllCars());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CarDTO> getCarById(@PathVariable Long id) {        
+    @Operation(summary = "Get car by ID", description = "Retrieve a car by its ID")
+    @ApiResponse(responseCode = "200", description = "Car found")
+    @ApiResponse(responseCode = "404", description = "Car not found", content = @Content)
+    public ResponseEntity<CarDTO> getCarById(@Parameter @PathVariable Long id) {        
         return ResponseEntity.ok(carService.getCarById(id));
     }
     
     @PostMapping
-    public ResponseEntity<CarDTO> addCar(@RequestBody @Valid Car car) {
+    @Operation(summary = "Add a new car", description = "Create a new car entry")
+    @ApiResponse(responseCode = "201", description = "Car created successfully")
+    public ResponseEntity<CarDTO> addCar(@Parameter @RequestBody @Valid Car car) {
         return ResponseEntity.status(HttpStatus.CREATED).body(carService.addCar(car));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CarDTO> updateCar(@PathVariable long id, @RequestBody @Valid UpdateDTO updateDTO){
+    @Operation(summary = "Update an existing car", description = "Update the details of an existing car")
+    @ApiResponse(responseCode = "200", description = "Car updated successfully")
+    @ApiResponse(responseCode = "404", description = "Car not found", content = @Content)
+    public ResponseEntity<CarDTO> updateCar(@Parameter @PathVariable long id, @Parameter @RequestBody @Valid UpdateDTO updateDTO){
         return ResponseEntity.ok(carService.updateCar(id, updateDTO));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCar(@PathVariable long id){
+    @Operation(summary = "Delete a car", description = "Remove a car from the system by its ID")
+    @ApiResponse(responseCode = "204", description = "Car deleted successfully")
+    @ApiResponse(responseCode = "404", description = "Car not found", content = @Content)
+    public ResponseEntity<Void> deleteCar(@Parameter @PathVariable long id){
         carService.deleteCar(id);
         return ResponseEntity.noContent().build();
     }

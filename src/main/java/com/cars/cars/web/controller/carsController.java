@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @RestController
-@RequestMapping("/cars")
+@RequestMapping
 @Tag(name = "Cars", description = "Operations related to cars")
 public class carsController {
 

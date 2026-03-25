@@ -6,8 +6,8 @@ import org.springframework.stereotype.Repository;
 
 import com.cars.cars.domain.dto.CarDTO;
 import com.cars.cars.domain.dto.UpdateDTO;
-import com.cars.cars.domain.exception.CarAlreadyExistsException;
-import com.cars.cars.domain.exception.CarNotFoundException;
+import com.cars.cars.domain.exception.AlreadyExistsException;
+import com.cars.cars.domain.exception.NotFoundException;
 import com.cars.cars.domain.repository.CarRepository;
 import com.cars.cars.persistence.crud.CarsCrud;
 import com.cars.cars.persistence.mapper.CarMapper;
@@ -32,13 +32,13 @@ public class CarEntityRepository implements CarRepository{
     @Override
     public CarDTO getCarById(Long id) {
         return carMapper.toDTO(carsCrud.findById(id).orElseThrow(
-            () -> new CarNotFoundException("Car not found")
+            () -> new NotFoundException("Car not found")
         ));
     }
 
     @Override
     public CarDTO addCar(Car car) {
-        if (carsCrud.findFirstByModel(car.getModel()) != null) throw new CarAlreadyExistsException("Model Car Already Exists: " + car.getModel());
+        if (carsCrud.findFirstByModel(car.getModel()) != null) throw new AlreadyExistsException("Model Car Already Exists: " + car.getModel());
         
         return carMapper.toDTO(carsCrud.save(car));
     }
@@ -47,7 +47,7 @@ public class CarEntityRepository implements CarRepository{
     public CarDTO updateCar(long id, UpdateDTO updateDTO) {
        Car car = carsCrud.findById(id).orElse(null);
        
-         if (car == null) throw new CarNotFoundException("Car not found with id: " + id);
+         if (car == null) throw new NotFoundException("Car not found with id: " + id);
         
          carMapper.updateEntityFromDTO(updateDTO, car);
 
@@ -57,7 +57,7 @@ public class CarEntityRepository implements CarRepository{
     @Override
     public void deleteCar(long id) {
         Car car = carsCrud.findById(id).orElse(null);
-        if(car == null) throw new CarNotFoundException("Car not found with id: " + id);
+        if(car == null) throw new NotFoundException("Car not found with id: " + id);
         carsCrud.deleteById(id);
     }
 }

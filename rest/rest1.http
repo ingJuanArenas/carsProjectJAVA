@@ -1,27 +1,32 @@
 ###
-GET http://localhost:8090/api/cars/cars
+GET http://localhost:8090/api/cars
 Accept: application/json
+Authorization: Basic user:f10b5d46-6e92-432f-a450-d073ed336585
+###
+GET http://localhost:8090/api/cars/10
+Accept: application/json
+Authorization: Basic user:f10b5d46-6e92-432f-a450-d073ed336585
+
+
 
 ###
-GET http://localhost:8090/api/cars/cars/10
-Accept: application/json
-
-
-###
-POST http://localhost:8090/api/cars/cars
+POST http://localhost:8090/api/cars/
 Content-Type: application/json
+Authorization: Basic user:f10b5d46-6e92-432f-a450-d073ed336585
+
 
 {
-  "brand": "",
-  "model": "",
+  "brand": "sada",
+  "model": "sasad",
   "year": 2025,
   "price": 10000
 }
 
 
 ###
-PUT http://localhost:8090/api/cars/cars/12
+PUT http://localhost:8090/api/cars/2
 Content-Type: application/json
+Authorization: Basic user:f10b5d46-6e92-432f-a450-d073ed336585
 
 {
   "model": "2026",
@@ -30,5 +35,6 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:8090/api/cars/cars/12
+DELETE http://localhost:8090/api/cars/2
 Accept: application/json
+Authorization: Basic user:f10b5d46-6e92-432f-a450-d073ed336585

@@ -7,20 +7,20 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
-import com.cars.cars.domain.exception.CarAlreadyExistsException;
-import com.cars.cars.domain.exception.CarNotFoundException;
+import com.cars.cars.domain.exception.AlreadyExistsException;
+import com.cars.cars.domain.exception.NotFoundException;
 
 
 @RestControllerAdvice
 public class ServiceExceptionHandler {
     
-    @ExceptionHandler(CarAlreadyExistsException.class)
-    public ResponseEntity<Error> handleCarAlreadyExistsException(CarAlreadyExistsException ex) {
+    @ExceptionHandler(AlreadyExistsException.class)
+    public ResponseEntity<Error> handleCarAlreadyExistsException(AlreadyExistsException ex) {
         return ResponseEntity.status(409).body(new Error("CarAlreadyExists", ex.getMessage()));
     }
 
-    @ExceptionHandler(CarNotFoundException.class)
-    public ResponseEntity<Error> handleCarNotFoundException(CarNotFoundException ex) {
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<Error> handleCarNotFoundException(NotFoundException ex) {
         return ResponseEntity.status(404).body(new Error("CarNotFound", ex.getMessage()));
     }
 

@@ -25,9 +25,12 @@ public class UserDetailService implements UserDetailsService{
         var user = userCrud.findById(username).orElseThrow(()-> new UsernameNotFoundException("Username not found"));
         String[] roles = user.getRoles().stream().toArray(String[]:: new);
 
+        System.out.println(user.getPassword());
+        System.out.println(user.getRoles());
+
         return org.springframework.security.core.userdetails.User.builder().username(user.getUsername())
                                                                             .password(user.getPassword())
-                                                                            .roles(roles)
+                                                                            .authorities(roles)
                                                                             .disabled(user.isDisabled())
                                                                             .build();
     }

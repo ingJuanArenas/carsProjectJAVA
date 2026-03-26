@@ -20,7 +20,8 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
             .cors(cors -> {})
             .authorizeHttpRequests(auth -> {
-                auth.requestMatchers(HttpMethod.GET, "/api/cars/**").permitAll();
+
+                auth.requestMatchers(HttpMethod.GET, "/api/cars/*").permitAll();
                 auth.anyRequest().authenticated();
             })
 
@@ -28,6 +29,11 @@ public class SecurityConfig {
             .formLogin(form -> form.disable());
 
             return http.build();
+    }
+
+    @Bean
+    PasswordEncoder passwordEncoder(){
+        return new BCryptPasswordEncoder();
     }
 
 }

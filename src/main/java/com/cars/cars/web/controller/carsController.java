@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 
 @RestController
-@RequestMapping
+@RequestMapping("/api/cars")
 @Tag(name = "Cars", description = "Operations related to cars")
 public class carsController {
 
@@ -39,7 +39,7 @@ public class carsController {
         this.carService = carService;
     }
 
-    @GetMapping
+    @GetMapping("/")
     @Operation(summary = "Get all cars", description = "Retrieve a list of all cars")
     public ResponseEntity<List<CarDTO>> getAllCars() {
         return ResponseEntity.ok(carService.getAllCars());

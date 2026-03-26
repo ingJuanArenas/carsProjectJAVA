@@ -1,25 +1,22 @@
 ###
-GET http://localhost:8090/api/cars
-Accept: application/json
-Authorization: Basic user:f10b5d46-6e92-432f-a450-d073ed336585
+GET http://localhost:8090/api/cars/
 ###
 GET http://localhost:8090/api/cars/10
 Accept: application/json
-Authorization: Basic user:f10b5d46-6e92-432f-a450-d073ed336585
 
 
 
 ###
 POST http://localhost:8090/api/cars/
 Content-Type: application/json
-Authorization: Basic user:f10b5d46-6e92-432f-a450-d073ed336585
+Authorization: Basic YWRtaW46YWRtaW4xMjM=
 
 
 {
-  "brand": "sada",
-  "model": "sasad",
-  "year": 2025,
-  "price": 10000
+  "brand": "sada123123",
+  "model": "sasad231232",
+  "year": 2027,
+  "price": 1000
 }
 
 

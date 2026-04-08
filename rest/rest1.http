@@ -1,29 +1,29 @@
 ###
-GET http://localhost:8090/api/cars/
+GET http://localhost:8090/api/cars
 ###
-GET http://localhost:8090/api/cars/10
+GET http://localhost:8090/api/cars/16
 Accept: application/json
 
 
 
 ###
-POST http://localhost:8090/api/cars/
+POST http://localhost:8090/api/cars
 Content-Type: application/json
 Authorization: Basic YWRtaW46YWRtaW4xMjM=
 
 
 {
-  "brand": "sada123123",
-  "model": "sasad231232",
+  "brand": "prueba",
+  "model": "prueba",
   "year": 2027,
   "price": 1000
 }
 
 
 ###
-PUT http://localhost:8090/api/cars/2
+PUT http://localhost:8090/api/cars/16
 Content-Type: application/json
-Authorization: Basic user:f10b5d46-6e92-432f-a450-d073ed336585
+Authorization: Basic YWRtaW46YWRtaW4xMjM=
 
 {
   "model": "2026",
@@ -32,6 +32,41 @@ Authorization: Basic user:f10b5d46-6e92-432f-a450-d073ed336585
 }
 
 ###
-DELETE http://localhost:8090/api/cars/2
+DELETE http://localhost:8090/api/cars/15
 Accept: application/json
-Authorization: Basic user:f10b5d46-6e92-432f-a450-d073ed336585
+Authorization: Basic YWRtaW46YWRtaW4xMjM=
+
+###
+GET http://localhost:8090/api/users
+Authorization: Basic YWRtaW46YWRtaW4xMjM=
+###
+GET http://localhost:8090/api/users/role/ADMIN
+###
+GET http://localhost:8090/api/users/testuser
+###
+POST http://localhost:8090/api/users/
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4xMjM=
+
+{
+  "username": "newuser",
+  "password": "password123",
+  "role": "USER",
+  "disabled": false
+}
+
+###
+PUT http://localhost:8090/api/users/newuser
+Content-Type: application/json
+Authorization: Basic YWRtaW46YWRtaW4xMjM=
+
+{
+  "username": "newuser",
+  "password": "updatedpass",
+  "role": "ADMIN",
+  "disabled": false
+}
+
+###
+DELETE http://localhost:8090/api/users/newuser
+Authorization: Basic YWRtaW46YWRtaW4xMjM=

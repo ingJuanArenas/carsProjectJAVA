@@ -1,5 +1,7 @@
 package com.cars.cars.web.Config;
 
+import java.util.List;
+
 import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -23,10 +25,8 @@ public class UserDetailService implements UserDetailsService{
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         var user = userCrud.findById(username).orElseThrow(()-> new UsernameNotFoundException("Username not found"));
-        String[] roles = user.getRoles().stream().toArray(String[]:: new);
+        String[] roles = List.of(user.getRole().name()).toArray(new String[0]);
 
-        System.out.println(user.getPassword());
-        System.out.println(user.getRoles());
 
         return org.springframework.security.core.userdetails.User.builder().username(user.getUsername())
                                                                             .password(user.getPassword())

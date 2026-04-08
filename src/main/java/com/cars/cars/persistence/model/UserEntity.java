@@ -1,7 +1,5 @@
 package com.cars.cars.persistence.model;
 
-import java.util.Set;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
@@ -29,8 +27,11 @@ public class UserEntity {
     @Column(nullable = false)
     private String password;
 
-    @ElementCollection(fetch = FetchType.EAGER)
+
     @Enumerated(EnumType.STRING)
-    private Set<Role> roles;
+    private Role role;
+
+
+    @Column(nullable = false)
     private boolean disabled;
 }

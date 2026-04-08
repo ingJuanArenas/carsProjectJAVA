@@ -20,8 +20,9 @@ public class SecurityConfig {
         http.csrf(csrf -> csrf.disable())
             .cors(cors -> {})
             .authorizeHttpRequests(auth -> {
-
+                auth.requestMatchers("/api/users/**").hasAuthority("ADMIN");
                 auth.requestMatchers(HttpMethod.GET, "/api/cars/*").permitAll();
+                auth.requestMatchers("/api/cars/**").hasAnyAuthority("ADMIN", "USER");
                 auth.anyRequest().authenticated();
             })
 
